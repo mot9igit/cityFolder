@@ -15,7 +15,9 @@ class cityFolderHomeManagerController extends modExtraManagerController
      */
     public function initialize()
     {
-        $this->cityFolder = $this->modx->getService('cityFolder', 'cityFolder', MODX_CORE_PATH . 'components/cityfolder/model/');
+		$corePath = $this->modx->getOption('cityfolder_core_path', array(), $this->modx->getOption('core_path') . 'components/cityfolder/');
+		$this->cityFolder = $this->modx->getService('cityFolder', 'cityFolder', $corePath . 'model/');
+
         parent::initialize();
     }
 
@@ -52,14 +54,15 @@ class cityFolderHomeManagerController extends modExtraManagerController
      */
     public function loadCustomCssJs()
     {
-        $this->addCss($this->cityFolder->config['cssUrl'] . 'mgr/main.css');
-        $this->addJavascript($this->cityFolder->config['jsUrl'] . 'mgr/cityfolder.js');
-        $this->addJavascript($this->cityFolder->config['jsUrl'] . 'mgr/misc/utils.js');
-        $this->addJavascript($this->cityFolder->config['jsUrl'] . 'mgr/misc/combo.js');
-        $this->addJavascript($this->cityFolder->config['jsUrl'] . 'mgr/widgets/items.grid.js');
-        $this->addJavascript($this->cityFolder->config['jsUrl'] . 'mgr/widgets/items.windows.js');
-        $this->addJavascript($this->cityFolder->config['jsUrl'] . 'mgr/widgets/home.panel.js');
-        $this->addJavascript($this->cityFolder->config['jsUrl'] . 'mgr/sections/home.js');
+        $this->addCss($this->cityFolder->config['cssUrl'] . 'mgr/cityfolder.css?v='.$this->cityFolder->config['version']);
+        $this->addJavascript($this->cityFolder->config['jsUrl'] . 'mgr/cityfolder.js?v='.$this->cityFolder->config['version']);
+		$this->addJavascript($this->cityFolder->config['jsUrl'] . 'mgr/utils/utils.js?v='.$this->cityFolder->config['version']);
+		$this->addJavascript($this->cityFolder->config['jsUrl'] . 'mgr/utils/combo.js?v='.$this->cityFolder->config['version']);
+		$this->addJavascript($this->cityFolder->config['jsUrl'] . 'mgr/sections/home.js?v='.$this->cityFolder->config['version']);
+		$this->addJavascript($this->cityFolder->config['jsUrl'] . 'mgr/widgets/city.grid.js?v='.$this->cityFolder->config['version']);
+		$this->addJavascript($this->cityFolder->config['jsUrl'] . 'mgr/widgets/fields.grid.js?v='.$this->cityFolder->config['version']);
+		$this->addJavascript($this->cityFolder->config['jsUrl'] . 'mgr/widgets/city.windows.js?v='.$this->cityFolder->config['version']);
+		$this->addJavascript($this->cityFolder->config['jsUrl'] . 'mgr/widgets/fields.windows.js?v='.$this->cityFolder->config['version']);
 
         $this->addHtml('<script type="text/javascript">
         cityFolder.config = ' . json_encode($this->cityFolder->config) . ';

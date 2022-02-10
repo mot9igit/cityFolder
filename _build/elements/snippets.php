@@ -3,15 +3,15 @@
 return [
     'cityFolder' => [
         'file' => 'cityfolder',
-        'description' => 'cityFolder snippet to list items',
+        'description' => 'cityFolder snippet to list cities',
         'properties' => [
             'tpl' => [
                 'type' => 'textfield',
-                'value' => 'tpl.cityFolder.item',
+                'value' => 'tpl.cityFolder.city',
             ],
             'sortby' => [
                 'type' => 'textfield',
-                'value' => 'name',
+                'value' => 'id',
             ],
             'sortdir' => [
                 'type' => 'list',

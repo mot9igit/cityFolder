@@ -1,7 +1,7 @@
 --------------------
 cityFolder
 --------------------
-Author: John Doe <john@doe.com>
+Author: Artem Petropavlovsky <info@dart.agency>
 --------------------
 
-A basic Extra for MODx Revolution.
+Extra for adding city folder for your site on MODx Revolution.

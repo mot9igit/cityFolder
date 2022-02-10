@@ -1,34 +1,44 @@
 <?php
 include_once 'setting.inc.php';
 
-$_lang['cityfolder'] = 'cityFolder';
-$_lang['cityfolder_menu_desc'] = 'Пример расширения для разработки.';
-$_lang['cityfolder_intro_msg'] = 'Вы можете выделять сразу несколько предметов при помощи Shift или Ctrl.';
+$_lang['cityfolder'] = 'Города и папки';
+$_lang['cityfolder_menu_desc'] = 'Управление папками';
 
-$_lang['cityfolder_items'] = 'Предметы';
-$_lang['cityfolder_item_id'] = 'Id';
-$_lang['cityfolder_item_name'] = 'Название';
-$_lang['cityfolder_item_description'] = 'Описание';
-$_lang['cityfolder_item_active'] = 'Активно';
+$_lang['cityfolder_panel_main'] = 'Города';
+$_lang['cityfolder_panel_main_desc'] = 'Тут отображаются города и их папки';
 
-$_lang['cityfolder_item_create'] = 'Создать предмет';
-$_lang['cityfolder_item_update'] = 'Изменить Предмет';
-$_lang['cityfolder_item_enable'] = 'Включить Предмет';
-$_lang['cityfolder_items_enable'] = 'Включить Предметы';
-$_lang['cityfolder_item_disable'] = 'Отключить Предмет';
-$_lang['cityfolder_items_disable'] = 'Отключить Предметы';
-$_lang['cityfolder_item_remove'] = 'Удалить Предмет';
-$_lang['cityfolder_items_remove'] = 'Удалить Предметы';
-$_lang['cityfolder_item_remove_confirm'] = 'Вы уверены, что хотите удалить этот Предмет?';
-$_lang['cityfolder_items_remove_confirm'] = 'Вы уверены, что хотите удалить эти Предметы?';
-$_lang['cityfolder_item_active'] = 'Включено';
+$_lang['cityfolder_city_grid_id'] = 'ID';
+$_lang['cityfolder_city_grid_key'] = 'Ключ города';
+$_lang['cityfolder_city_grid_key_empty'] = 'Пример: perm';
+$_lang['cityfolder_city_grid_https'] = 'HTTPS';
+$_lang['cityfolder_city_grid_city'] = 'Город';
+$_lang['cityfolder_city_grid_city_r'] = 'Город (склонение)';
+$_lang['cityfolder_city_grid_phone'] = 'Телефон';
+$_lang['cityfolder_city_grid_email'] = 'Эл. Почта';
+$_lang['cityfolder_city_grid_address'] = 'Адрес';
+$_lang['cityfolder_city_grid_address_full'] = 'Полный адрес';
+$_lang['cityfolder_city_grid_address_coordinats'] = 'Координаты';
+$_lang['cityfolder_city_grid_actions'] = 'Действия';
+$_lang['cityfolder_err_name_ae'] = 'Такой ключ уже есть!';
 
-$_lang['cityfolder_item_err_name'] = 'Вы должны указать имя Предмета.';
-$_lang['cityfolder_item_err_ae'] = 'Предмет с таким именем уже существует.';
-$_lang['cityfolder_item_err_nf'] = 'Предмет не найден.';
-$_lang['cityfolder_item_err_ns'] = 'Предмет не указан.';
-$_lang['cityfolder_item_err_remove'] = 'Ошибка при удалении Предмета.';
-$_lang['cityfolder_item_err_save'] = 'Ошибка при сохранении Предмета.';
+$_lang['cityfolder_grid_search_empty'] = 'Ключ или название города';
 
-$_lang['cityfolder_grid_search'] = 'Поиск';
-$_lang['cityfolder_grid_actions'] = 'Действия';
+$_lang['cityfolder_form_file'] = 'Файл';
+$_lang['cityfolder_form_start'] = 'Загрузить';
+$_lang['cityfolder_import_header'] = 'Загрузка завершена!';
+$_lang['cityfolder_form_loading'] = 'Состояние импорта';
+$_lang['cityfolder_form_loading_text'] = 'Городов добавлено:';
+
+$_lang['cityfolder_window_main'] = 'Основное';
+$_lang['cityfolder_window_fields'] = 'Дополнительные поля';
+$_lang['cityfolder_fields_grid_name'] = 'Название';
+$_lang['cityfolder_fields_grid_key'] = 'Ключ';
+$_lang['cityfolder_fields_grid_value'] = 'Значение';
+$_lang['cityfolder_fields_grid_search_empty'] = 'Ключ или значение';
+$_lang['cityfolder_err_key_ae'] = 'Такой ключ уже добавлен для данного домена!';
+
+$_lang['cityfolder_resource_tab'] = 'Города и папки';
+$_lang['cityfolder_resource_tab_desc'] = 'Здесь вы можете вставлять содержимое для каждого города';
+$_lang['cityfolder_resource_grid_domain'] = 'Город';
+$_lang['cityfolder_resource_grid_content'] = 'Содержимое';
+$_lang['cityfolder_resource_domain_ae'] = 'Нельзя добавлять 2 содержимых для одного города!';

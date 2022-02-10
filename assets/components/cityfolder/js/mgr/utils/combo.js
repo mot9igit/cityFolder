@@ -46,3 +46,27 @@ Ext.extend(cityFolder.combo.Search, Ext.form.TwinTriggerField, {
 });
 Ext.reg('cityfolder-combo-search', cityFolder.combo.Search);
 Ext.reg('cityfolder-field-search', cityFolder.combo.Search);
+
+cityFolder.combo.City = function (config) {
+    config = config || {};
+    Ext.applyIf(config, {
+        url: cityFolder.config.connector_url,
+        baseParams: {
+            action: 'mgr/load/city',
+        },
+        name: 'city',
+        hiddenName: 'city',
+        fields: ['id', 'city'],
+        mode: 'remote',
+        displayField: 'city',
+        fieldLabel: _('cityfolder_city_grid_city'),
+        valueField: 'id',
+        editable: true,
+        anchor: '99%',
+        allowBlank: false,
+        autoLoad: false
+    });
+    cityFolder.combo.City.superclass.constructor.call(this, config);
+};
+Ext.extend(cityFolder.combo.City, MODx.combo.ComboBox);
+Ext.reg('cityfolder-combo-city', cityFolder.combo.City);

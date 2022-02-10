@@ -5,7 +5,10 @@ return [
         'file' => 'cityfolder',
         'description' => '',
         'events' => [
-            'OnManagerPageInit' => [],
+			'OnHandleRequest' => [],
+            'OnPageNotFound' => [],
+			'OnDocFormRender' => [],
+			'OnLoadWebDocument' => [],
         ],
     ],
 ];

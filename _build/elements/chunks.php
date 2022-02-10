@@ -1,12 +1,8 @@
 <?php
 
 return [
-    'tpl.cityFolder.item' => [
-        'file' => 'item',
+    'tpl.cityFolder.city' => [
+        'file' => 'city',
         'description' => '',
-    ],
-    'tpl.cityFolder.office' => [
-        'file' => 'office',
-        'description' => '',
-    ],
+    ]
 ];
