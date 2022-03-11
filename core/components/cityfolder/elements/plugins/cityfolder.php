@@ -80,6 +80,9 @@ switch ($modx->event->name) {
 				);
 				//$modx->log(1, print_r($criteria, 1));
 				$res = $modx->getObject("modResource", $criteria);
+				if(!$res){
+					$res = $modx->getObject("modResource", $modx->getOption('site_start'));
+				}
 			}else{
 				$res = $modx->getObject("modResource", $modx->getOption('site_start'));
 			}
