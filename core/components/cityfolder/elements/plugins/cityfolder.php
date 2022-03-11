@@ -11,8 +11,48 @@ switch ($modx->event->name) {
 		if ($modx->context->get('key') == 'mgr' || $cityFolder->isAjaxRequestInAssets()) {
 			return;
 		}
-		if ($city = $cityFolder->detectCity()) {
-			$cityFolder->setCity($city);
+		// !!! add include path parameters
+		$url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+		$parse = parse_url($url);
+		$path = explode("/", $parse['path']);
+		$key = $path[1];
+		// Ведущий слэш и первый каталог убираем, проверяем на наличие в компоненте
+		unset($path[0]);
+		unset($path[1]);
+		if(count($path) != 1){
+			$page_uri = implode("/", $path);
+			$criteria = array(
+				"uri" => $page_uri
+			);
+			$res = $modx->getObject("modResource", $criteria);
+		}else{
+			$res = $modx->getObject("modResource", $modx->getOption('site_start'));
+		}
+		$needle_id = explode(",", $modx->getOption("cityfolder_catalogs"));
+		if(count($needle_id)) {
+			// local mode
+			$id = $res->id;
+			//$modx->log(1, $id);
+			$pids = $modx->getParentIds($id, 10, array('context' => 'web'));
+			$searcher = false;
+			if (in_array($id, $needle_id)) {
+				$searcher = true;
+			}
+			foreach ($pids as $pid) {
+				if (in_array($pid, $needle_id)) {
+					$searcher = true;
+				}
+			}
+			if ($searcher) {
+				if ($city = $cityFolder->detectCity()) {
+					$cityFolder->setCity($city);
+				}
+			}
+		}else{
+			// global mode
+			if ($city = $cityFolder->detectCity()) {
+				$cityFolder->setCity($city);
+			}
 		}
 		break;
 	case 'OnPageNotFound':
@@ -32,25 +72,59 @@ switch ($modx->event->name) {
 		$id = $cityFolder->getDomainId($key);
 		// город найден
 		if($id){
-			if(count($path) != 1){
+
+			if(count($path) >= 1){
 				$page_uri = implode("/", $path);
 				$criteria = array(
 					"uri" => $page_uri
 				);
+				//$modx->log(1, print_r($criteria, 1));
 				$res = $modx->getObject("modResource", $criteria);
 			}else{
 				$res = $modx->getObject("modResource", $modx->getOption('site_start'));
 			}
-			// ресурс найден
-			if($res){
-				// формируем плейсхолдеры
-				$response = $pdo->getArray('cityFolderCity', array('key' => $key));
-
-				if (count($response)) {
-					$fields = $cityFolder->getFields($response['id']);
-					$modx->setPlaceholders(array_merge($response, $fields), $modx->getOption('cityfolder_phx_prefix'));
+			$needle_id = explode(",", $modx->getOption("cityfolder_catalogs"));
+			$id = $res->get("id");
+			$modx->log(1, $id);
+			$pids = $modx->getParentIds($id, 10, array('context' => 'web'));
+			$searcher = false;
+			if(count($needle_id)){
+				// local mode
+				if(in_array($id, $needle_id)){
+					$searcher = true;
 				}
-				$modx->sendForward($res->id);
+				foreach($pids as $pid){
+					if(in_array($pid, $needle_id)){
+						$searcher = true;
+					}
+				}
+				if($searcher){
+					// формируем плейсхолдеры
+					$response = $pdo->getArray('cityFolderCity', array('key' => $key));
+					if (count($response)) {
+						$fields = $cityFolder->getFields($response['id']);
+						$modx->setPlaceholders(array_merge($response, $fields), $modx->getOption('cityfolder_phx_prefix'));
+					}
+					$modx->sendForward($res->id);
+				}else{
+					$url = $modx->makeUrl($res->id);
+					$modx->sendRedirect($url);
+				}
+			}else{
+				// global mode
+				if($res){
+					// формируем плейсхолдеры
+					$response = $pdo->getArray('cityFolderCity', array('key' => $key));
+
+					if (count($response)) {
+						$fields = $cityFolder->getFields($response['id']);
+						$modx->setPlaceholders(array_merge($response, $fields), $modx->getOption('cityfolder_phx_prefix'));
+					}
+					$modx->sendForward($res->id);
+				}else{
+					$url = $modx->makeUrl($res->id);
+					$modx->sendRedirect($url);
+				}
 			}
 		}
 
@@ -64,7 +138,7 @@ switch ($modx->event->name) {
 		$modx->regClientStartupHTMLBlock('
             <script type="text/javascript">
                 Ext.onReady(function() {
-                    cityFolder.config.richtext = ' . $resource->richtext . ';
+                    // cityFolder.config.richtext = ' . $resource->richtext . ';
                 });
             </script>
         ');

@@ -35,4 +35,8 @@ return [
             ],
         ],
     ],
+	'cf.sitemap' => [
+		'file' => 'cfSitemap',
+		'description' => 'cityFolder snippet to list sitemap',
+	]
 ];
